@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.dao.StudentDao">
+    <select id="getStudent4Login" resultType="com.nju.bean.Student">
+        select * from student where loginAcct = #{loginAcct} and passWord = #{passWord};
+    </select>
+    <select id="getCourseToken" resultType="String">
+        select token from course where cId = #{cId};
+    </select>
+    <insert id="selectCourse" parameterType="Integer">
+        insert into course_select_record (sId, cId,isValid) values (#{sId},#{cId},1);
+    </insert>
+    <update id="unselectCourse" parameterType="Integer">
+        update course_select_record set isValid = 0 where sId = #{sId} and cId = #{cId};
+    </update>
+    <select id="getSelectedCourse" resultType="com.nju.bean.Course">
+        select c.cName,c.cId,c.tId from course_select_record csr join course c on csr.cId = c.cId
+        where csr.sId = #{sId} and csr.isValid = 1;
+    </select>
+    <select id="notSelectCourses" resultType="com.nju.bean.Course">
+        select c.cId,c.cName,c.tId from course c where c.cId not in
+        (select csr.cId from course_select_record csr where csr.sId = #{sId} and csr.isValid=1);
+    </select>
+    <insert id="signOn" parameterType="Integer">
+        insert into attend_lesson_record (sId, lId, isAttend) values (#{sId},#{lId},1);
+    </insert>
+    <select id="countSigned" resultType="Integer">
+        select count(*) from attend_lesson_record where sId = #{sId} and lId = #{lId};
+    </select>
+    <select id="getCourseScore" resultType="Integer">
+        select score from course_select_record where sId=#{sId} and cId=#{cId};
+    </select>
+    <insert id="answerLessonQuestion">
+        insert into answer_record (sId,hId,answer) values (#{sId},#{hId},#{answer});
+    </insert>
+    <select id="getQuestions" resultType="com.nju.bean.Homework">
+        select hId,lId,cId,hTitle,hContent,releaseTime from homework where cId = #{cId};
+    </select>
+    <select id="getLessons" resultType="com.nju.bean.Lesson">
+        select l.lId,l.cId,l.lTime,lcr.comment from lesson l join lesson_comment_record lcr on l.lId = lcr.lId
+        where lcr.sId = #{sId} and l.cId = #{cId};
+    </select>
+    <update id="commentLesson">
+        update lesson_comment_record set comment = #{comment} where sId = #{sId} and lId = #{lId};
+    </update>
+    <update id="commentCourse">
+        update course_select_record set comment = #{comment} where sId = #{sId} and cId = #{cId} and isValid = 1;
+    </update>
+</mapper>

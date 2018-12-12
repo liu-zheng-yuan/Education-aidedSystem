@@ -1,0 +1,84 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID" version="2.5">
+  <!--1 启动Spring的容器-->
+  <!--将Spring的配置文件的路径放入web应用的初始化参数中-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:spring/spring-context.xml</param-value>
+  </context-param>
+  <!--配置监听器，在监听器的web应用context初始化方法中生成IOC容器-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!--配置SpringMVC的前端控制器 拦截所有请求-->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--配置初始化参数：MVC的配置文件的路径-->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath*:spring/spring-mvc.xml</param-value>
+    </init-param>
+    <!--放在init-param下面，加载时就创建-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!--3.SpringMVC的字符编码过滤器
+  把配置的字符编码设置成请求或者是响应的字符编码
+  放在所有过滤器之前-->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceRequestEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceResponseEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--4.使用REST风格的URI
+  使用过滤器将请求方式转为指定的方式
+  注意过滤器顺序-->
+  <!--<filter>-->
+    <!--<filter-name>HiddenHttpMethodFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>HiddenHttpMethodFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+  <!--5.ajax支持发put请求 但是tomcat对put请求会出现读取不了请求体中参数的问题
+  该过滤器重写了getParameter方法，封装了请求体中参数，解决了这个问题.
+  与HiddenHttpMethodFilter二者选一个就行-->
+  <!--<filter>-->
+    <!--<filter-name>HttpPutFormContentFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>HttpPutFormContentFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+</web-app>
