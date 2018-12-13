@@ -1,10 +1,20 @@
 package com.nju.bean;
 
+import javax.swing.*;
+
 public class Student {
     private Integer sId;
     private String sName;
-    private String loginAcct;
-    private String passWord;
+    private String wxId;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "sId=" + sId +
+                ", sName='" + sName + '\'' +
+                ", wxId='" + wxId + '\'' +
+                '}';
+    }
 
     public Integer getsId() {
         return sId;
@@ -22,29 +32,11 @@ public class Student {
         this.sName = sName;
     }
 
-    public String getLoginAcct() {
-        return loginAcct;
+    public String getWxId() {
+        return wxId;
     }
 
-    public void setLoginAcct(String loginAcct) {
-        this.loginAcct = loginAcct;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "sId=" + sId +
-                ", sName='" + sName + '\'' +
-                ", loginAcct='" + loginAcct + '\'' +
-                ", passWord='" + passWord + '\'' +
-                '}';
+    public void setWxId(String wxId) {
+        this.wxId = wxId;
     }
 }

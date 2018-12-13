@@ -48,9 +48,7 @@ public class CRUDTest {
     private HttpSession getLoginSession() throws Exception {
         //模拟请求之后 登录信息保存在session中
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/doSLogin")
-                .param("loginAcct","aaa")
-                .param("passWord","123456"))
-                .andExpect(status().isOk()).andReturn();
+                .param("wxId","aaa111")).andReturn();
         return result.getRequest().getSession();
     }
 
@@ -63,9 +61,10 @@ public class CRUDTest {
     }
     @Test
     public void testLogin() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/doSLogin").param("loginAcct","bbb")
-                .param("passWord","123")).andReturn();
-        MvcResult result1 = mockMvc.perform(MockMvcRequestBuilders.get("/selectCourse").param("cId","1")).andReturn();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/doSLogin")
+                        .param("wxId","bbb222")).andReturn();
+        MvcResult result1 = mockMvc.perform(MockMvcRequestBuilders.get("/selectCourse")
+                .param("cId","1")).andReturn();
         System.out.println(result.getResponse().getContentAsString());
         System.out.println(result1.getResponse().getContentAsString());
     }
