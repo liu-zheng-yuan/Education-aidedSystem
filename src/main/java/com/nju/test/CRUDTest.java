@@ -5,7 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -14,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -25,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-/*
+/* 
  * 使用springtest模块提供的测试请求功能，得到返回值，测试curd请求的正确性，
  * 坑：SPring4测试的时候需要servlet3.0的支持
  * */
@@ -45,6 +48,8 @@ public class CRUDTest {
     /*
      * 模拟登录之后信息保存在session
      * */
+    
+    
     private HttpSession getLoginSession() throws Exception {
         //模拟请求之后 登录信息保存在session中
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/doSLogin")
@@ -58,6 +63,7 @@ public class CRUDTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 //      要使用mocksession模拟登陆之后的操作 先new一个对象
         this.session = new MockHttpSession();
+          
     }
     @Test
     public void testLogin() throws Exception {
@@ -144,6 +150,19 @@ public class CRUDTest {
                 .param("comment","1号用户对1号课程的评价")
                 .session((MockHttpSession)getLoginSession()))
                 .andDo(print());
+    }
+    
+    
+    @Test
+    public void testViewCourseware() throws Exception {
+    	this.mockMvc.perform(get("/getCoursewareInfo")
+    			.param("cwId","3").session((MockHttpSession) getLoginSession())).andDo(print());
+    }
+  
+    @Test
+    public void testDownloadCourseware() throws Exception {
+    	this.mockMvc.perform(get("/download")
+    			.param("cwId", "1").session((MockHttpSession) getLoginSession())).andDo(print());
     }
 }
 
