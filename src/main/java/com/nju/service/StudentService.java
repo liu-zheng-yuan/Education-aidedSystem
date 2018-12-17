@@ -1,6 +1,7 @@
 package com.nju.service;
 
 import com.nju.bean.Course;
+import com.nju.bean.Courseware;
 import com.nju.bean.Homework;
 import com.nju.bean.Lesson;
 import com.nju.bean.Student;
@@ -70,5 +71,17 @@ public class StudentService {
 
     public void commentCourse(Integer sId, Integer cId, String comment) {
         studentDao.commentCourse(sId,cId,comment);
+    }
+    
+    public Courseware getCourseware(Integer cwId) {
+    	return studentDao.getCourseware(cwId);  	
+    }
+    
+    public void updateCoursewareDownCount(Integer cwId) {
+    	studentDao.updateCoursewareDownCount(cwId);
+    }
+    
+    public void updateCoursewareViewCount(Integer cwId) {
+    	studentDao.updateCoursewareViewCount(cwId);
     }
 }

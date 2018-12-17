@@ -1,6 +1,7 @@
 package com.nju.dao;
 
 import com.nju.bean.Course;
+import com.nju.bean.Courseware;
 import com.nju.bean.Homework;
 import com.nju.bean.Lesson;
 import com.nju.bean.Student;
@@ -38,4 +39,11 @@ public interface StudentDao {
     void commentLesson(@Param("sId")Integer sId, @Param("lId")Integer lId, @Param("comment")String comment);
 
     void commentCourse(@Param("sId")Integer sId, @Param("cId")Integer cId, @Param("comment")String comment);
-}
+    
+    Courseware getCourseware(@Param("cwId")Integer cwId);
+    
+    void updateCoursewareDownCount(@Param("cwId")Integer cwId);
+    
+    void updateCoursewareViewCount(@Param("cwId")Integer cwId);
+    }
+
