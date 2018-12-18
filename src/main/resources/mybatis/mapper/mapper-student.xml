@@ -57,5 +57,8 @@
         <update id="updateCoursewareViewCount">
     	update courseware set viewCount=viewCount+1 where cwId=#{cwId}
     </update>
+    <select id="getCoursewareByCId" resultType="com.nju.bean.Courseware">
+    	select * from courseware where cId=#{cId}
+    </select>
     
 </mapper>
