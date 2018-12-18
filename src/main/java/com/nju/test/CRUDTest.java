@@ -181,6 +181,11 @@ public class CRUDTest {
     	this.mockMvc.perform(get("/getCoursewareInfoByCId")
     			.param("cId", "1").session((MockHttpSession) getLoginSession())).andDo(print());
     }
+    @Test
+    public void testGetAllCourses() throws Exception{
+        this.mockMvc.perform(get("/getAllCourses")
+                .session((MockHttpSession) getLoginSession())).andDo(print());
+    }
 
 }
 
