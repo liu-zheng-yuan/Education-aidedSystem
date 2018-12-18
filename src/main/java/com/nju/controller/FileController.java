@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,7 +24,7 @@ import com.nju.service.StudentService;
 import com.nju.service.TeacherService;
 
 	@Controller
-	public class FileController{
+	public class FileController extends HttpServlet{
 	    @Autowired
 	    StudentService studentService;
 	    @Autowired
@@ -30,6 +32,7 @@ import com.nju.service.TeacherService;
 	    @ResponseBody
 	@RequestMapping(value = "/download",method = RequestMethod.GET)
 	public String download(Integer cwId,HttpServletResponse response,HttpSession session){
+	    	
 	    	 Student student = (Student) session.getAttribute("loginUser");
 	         if (student == null){
 	             return null;
@@ -39,9 +42,14 @@ import com.nju.service.TeacherService;
 				//获取绝对路径
 
 	           Courseware cw=studentService.getCourseware(cwId);
-	            String realPath=cw.getUrl();
-	    		//String realPath = "D:\\\\test.docx";
+
 	           
+	           //  /common/课程id/课件名 课件上传的位置         
+	    		String realPath = "/common/"+cw.getcId()+cw.getCwName();
+	           
+		           //	realPath = "D:\\\\test.docx";
+		           //测试用
+	    		
 	           //2.获取要下载的文件名
 	           String fileName = realPath.substring(realPath.lastIndexOf("\\")+1);
 	             response.reset();
@@ -57,7 +65,7 @@ import com.nju.service.TeacherService;
 	             }
 	            in.close();
 	            studentService.updateCoursewareDownCount(cwId);
-	            return "succeed";
+	            return "success";
 	            }
 	    	catch( Exception e) {
 	    		e.printStackTrace();
@@ -67,10 +75,11 @@ import com.nju.service.TeacherService;
 	}
 	/*
 	 * 查看课件信息
+	 * 根据cwId 
 	 */
     @ResponseBody
-    @RequestMapping(value = "/getCoursewareInfo",method = RequestMethod.GET)
-	public Courseware getCoursewareInfo(Integer cwId,HttpSession session) {
+    @RequestMapping(value = "/getCoursewareInfoByCwId",method = RequestMethod.GET)
+	public Courseware getCoursewareInfoByCwId(Integer cwId,HttpSession session) {
     	 Student student = (Student) session.getAttribute("loginUser");
          if (student == null){
              return null;
@@ -87,5 +96,28 @@ import com.nju.service.TeacherService;
 		}
 		
 	}
+    
+    /*
+     * 查看课件信息：根据cId
+     */
+    
+    @ResponseBody
+    @RequestMapping(value = "/getCoursewareInfoByCId",method = RequestMethod.GET)
+    public List<Courseware> getCoursewareInfoBy(Integer cId,HttpSession session){
+   	 Student student = (Student) session.getAttribute("loginUser");
+     if (student == null){
+         return null;
+     }
+	try {
+		List<Courseware> coursewareByCId = studentService.getCoursewareByCId(cId);
+		studentService.updateCoursewareViewCount(cId);
+		return coursewareByCId;
+	}
+	
+	catch(Exception e){
+		e.printStackTrace();
+		return null;
+	}
+    }
 
 }

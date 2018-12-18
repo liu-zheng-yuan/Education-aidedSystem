@@ -1,12 +1,21 @@
 package com.nju.bean;
 
+import java.util.Date;
+
 public class Courseware {
-	Integer cwId;
-	String cwName;
-	Integer cId;
-	String url;
-	Integer downCount;
-	Integer viewCount;
+	private Integer cwId;
+	private String cwName;
+	private Integer cId;
+	private String url;
+	private Integer downCount;
+	private Integer viewCount;
+	private Date uploadTime;
+	public Date getUploadTime() {
+		return uploadTime;
+	}
+	public void setUploadTime(Date uploadTime) {
+		this.uploadTime = uploadTime;
+	}
 	public Integer getCwId() {
 		return cwId;
 	}
