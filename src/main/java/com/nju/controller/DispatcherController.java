@@ -98,7 +98,7 @@ public class DispatcherController {
     @ResponseBody
     @RequestMapping(value = "/signOn", method = RequestMethod.GET)
     public String signOn(Integer lId, HttpSession session) {
-        Student student = (Student) session.getAttribute("loginUser");
+        Student student = (Student) session.getAttribute("loginUser" );
         if (student == null) {
             return "failed";
         }

@@ -45,7 +45,7 @@ import com.nju.service.TeacherService;
 
 	           
 	           //  /common/课程id/课件名 课件上传的位置         
-	    		String realPath = "/common/"+cw.getcId()+cw.getCwName();
+	    		String realPath = "/common/"+cw.getcId()+"/"+cw.getCwName();
 	           
 		           //	realPath = "D:\\\\test.docx";
 		           //测试用
