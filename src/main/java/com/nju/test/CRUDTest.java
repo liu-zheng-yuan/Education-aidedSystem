@@ -20,9 +20,15 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -159,10 +165,22 @@ public class CRUDTest {
     			.param("cwId","3").session((MockHttpSession) getLoginSession())).andDo(print());
     }
   
+    /*
+     * 测试下载功能
+     * 测试时把FileController.download(Integer cwId,HttpServletResponse response,HttpSession session)
+     * 方法中的realPath修改为测试路径
+     */
     @Test
     public void testDownloadCourseware() throws Exception {
     	this.mockMvc.perform(get("/download")
     			.param("cwId", "1").session((MockHttpSession) getLoginSession())).andDo(print());
     }
+    
+    @Test
+    public void testViewCourwareByCId() throws Exception {
+    	this.mockMvc.perform(get("/getCoursewareInfoByCId")
+    			.param("cId", "1").session((MockHttpSession) getLoginSession())).andDo(print());
+    }
+
 }
 

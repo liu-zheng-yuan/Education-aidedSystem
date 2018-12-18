@@ -84,4 +84,8 @@ public class StudentService {
     public void updateCoursewareViewCount(Integer cwId) {
     	studentDao.updateCoursewareViewCount(cwId);
     }
+    
+    public List<Courseware> getCoursewareByCId(Integer cId) {
+    	return studentDao.getCoursewareByCId(cId);
+    }
 }
