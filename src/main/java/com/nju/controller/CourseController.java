@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -51,6 +52,31 @@ public class CourseController {
         try {
             List<Course> courses = studentService.getNotSelectCourses(student.getsId());
             return courses;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    @ResponseBody
+    @RequestMapping(value = "/getAllCourses",method = RequestMethod.GET)
+    public List<Course> getAllCourses(HttpSession session) {
+        Student student = (Student) session.getAttribute("loginUser");
+        if (student == null){
+            return null;
+        }
+        try {
+            List<Course> allCourses = new ArrayList<>();
+            List<Course> selectedCourses = studentService.getSelectedCourse(student.getsId());
+            List<Course> unselectedCourses = studentService.getNotSelectCourses(student.getsId());
+            for (Course c : selectedCourses) {
+                c.setSelected(1);
+                allCourses.add(c);
+            }
+            for (Course c : unselectedCourses) {
+                c.setSelected(0);
+                allCourses.add(c);
+            }
+            return allCourses;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -108,7 +108,7 @@ public class CRUDTest {
     }
     @Test
     public void testGetCourseScore() throws Exception {
-        this.mockMvc.perform(get("/getCourseScore").param("cId","2")
+        this.mockMvc.perform(get("/getCourseScore").param("cId","3")
                 .session((MockHttpSession)getLoginSession()))
                 .andDo(print());
     }
@@ -164,5 +164,11 @@ public class CRUDTest {
     	this.mockMvc.perform(get("/download")
     			.param("cwId", "1").session((MockHttpSession) getLoginSession())).andDo(print());
     }
+    @Test
+    public void testGetAllCourses() throws Exception{
+        this.mockMvc.perform(get("/getAllCourses")
+               .session((MockHttpSession) getLoginSession())).andDo(print());
+    }
+
 }
 

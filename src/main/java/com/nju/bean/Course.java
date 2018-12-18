@@ -8,6 +8,16 @@ public class Course {
     private Integer tId;
     private Date start;
     private Date end;
+    private int selected;
+
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public void setSelected(int selected) {
+        this.selected = selected;
+    }
 
     public Integer getcId() {
         return cId;
@@ -57,6 +67,7 @@ public class Course {
                 ", tId=" + tId +
                 ", start=" + start +
                 ", end=" + end +
+                ", selected=" + selected +
                 '}';
     }
 }
