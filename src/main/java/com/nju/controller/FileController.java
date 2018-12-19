@@ -73,6 +73,7 @@ import com.nju.service.TeacherService;
 //				}
 //
 //		}
+        //返回文件url的下载方法
 		@ResponseBody
 		@RequestMapping(value = "/download",method = RequestMethod.GET)
 		public String download(Integer cwId,HttpServletResponse response,HttpSession session){
