@@ -38,6 +38,9 @@
     <select id="getQuestions" resultType="com.nju.bean.Homework">
         select hId,lId,cId,hTitle,hContent,releaseTime from homework where cId = #{cId};
     </select>
+    <select id="getAnsweredQuestion" resultType="com.nju.bean.Homework">
+        select h.hId from homework h join answer_record ar on h.hId = ar.hId where h.cId = #{cId} and ar.sId = #{sId};
+    </select>
     <select id="getLessons" resultType="com.nju.bean.Lesson">
         select l.lId,l.cId,l.lTime,lcr.comment from lesson l join lesson_comment_record lcr on l.lId = lcr.lId
         where lcr.sId = #{sId} and l.cId = #{cId};
@@ -54,11 +57,11 @@
     <update id="updateCoursewareDownCount">
     	update courseware set downCount=downCount+1 where cwId=#{cwId}
     </update>
-        <update id="updateCoursewareViewCount">
+    <update id="updateCoursewareViewCount">
     	update courseware set viewCount=viewCount+1 where cwId=#{cwId}
     </update>
     <select id="getCoursewareByCId" resultType="com.nju.bean.Courseware">
     	select * from courseware where cId=#{cId}
     </select>
-    
+
 </mapper>

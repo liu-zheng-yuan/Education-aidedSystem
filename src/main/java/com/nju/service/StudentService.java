@@ -88,4 +88,8 @@ public class StudentService {
     public List<Courseware> getCoursewareByCId(Integer cId) {
     	return studentDao.getCoursewareByCId(cId);
     }
+
+    public List<Homework> getAnsweredQuestion(Integer cId,Integer sId) {
+        return studentDao.getAnsweredQuestion(cId,sId);
+    }
 }

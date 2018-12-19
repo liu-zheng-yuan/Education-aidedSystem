@@ -34,19 +34,20 @@ public interface StudentDao {
 
     List<Homework> getQuestions(Integer cId);
 
+    List<Homework> getAnsweredQuestion(@Param("cId")Integer cId,@Param("sId")Integer sId);
+
     List<Lesson> getLessons(@Param("sId")Integer sId, @Param("cId")Integer cId);
 
     void commentLesson(@Param("sId")Integer sId, @Param("lId")Integer lId, @Param("comment")String comment);
 
     void commentCourse(@Param("sId")Integer sId, @Param("cId")Integer cId, @Param("comment")String comment);
-    
+
     Courseware getCourseware(@Param("cwId")Integer cwId);
-    
+
     void updateCoursewareDownCount(@Param("cwId")Integer cwId);
-    
+
     void updateCoursewareViewCount(@Param("cwId")Integer cwId);
-    
+
     List<Courseware> getCoursewareByCId(@Param("cId")Integer cId);
-    
-    }
+}
 

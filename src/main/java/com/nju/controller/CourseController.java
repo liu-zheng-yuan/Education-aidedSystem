@@ -104,9 +104,22 @@ public class CourseController {
      * */
     @ResponseBody
     @RequestMapping(value = "/getQuestions",method = RequestMethod.GET)
-    public List<Homework> getQuestions(Integer cId) {
+    public List<Homework> getQuestions(Integer cId,HttpSession session) {
+        Student student = (Student) session.getAttribute("loginUser");
+        if (student == null){
+            return null;
+        }
         try {
-            return studentService.getQuestions(cId);
+            List<Homework> homeworks = studentService.getQuestions(cId);
+            List<Homework> answeredHomeworks = studentService.getAnsweredQuestion(cId,student.getsId());
+            for (Homework h : homeworks){
+                for (Homework ah : answeredHomeworks) {
+                    if (h.gethId() == ah.gethId()) {
+                        h.setAnswered(true);
+                    }
+                }
+            }
+            return homeworks;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

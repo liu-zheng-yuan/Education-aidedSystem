@@ -9,6 +9,15 @@ public class Homework {
     private String hTitle;
     private String hContent;
     private Date releaseTime;
+    private Boolean answered = false;//标识有没有
+
+    public Boolean getAnswered() {
+        return answered;
+    }
+
+    public void setAnswered(Boolean answered) {
+        this.answered = answered;
+    }
 
     public Date getReleaseTime() {
         return releaseTime;
@@ -67,6 +76,7 @@ public class Homework {
                 ", hTitle='" + hTitle + '\'' +
                 ", hContent='" + hContent + '\'' +
                 ", releaseTime=" + releaseTime +
+                ", answered=" + answered +
                 '}';
     }
 }
