@@ -83,7 +83,7 @@ public class CRUDTest {
 
     @Test
     public void testSelectCourse() throws Exception{
-        this.mockMvc.perform(post("/selectCourse").param("cId", "1").param("token","111")
+        this.mockMvc.perform(post("/selectCourse").param("cId", "5").param("token","111")
                 .session((MockHttpSession) getLoginSession()))
                 .andExpect(status().isOk())
                 .andDo(print());

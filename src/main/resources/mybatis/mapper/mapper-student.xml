@@ -10,7 +10,9 @@
         select token from course where cId = #{cId};
     </select>
     <insert id="selectCourse" parameterType="Integer">
-        insert into course_select_record (sId, cId,isValid) values (#{sId},#{cId},1);
+        INSERT INTO course_select_record (sId, cId,isValid)
+        SELECT #{sId},#{cId},1 FROM course_select_record
+        WHERE NOT EXISTS(SELECT sId,cId,isValid FROM course_select_record WHERE sId = #{sId} AND cId = #{cId} AND isValid = 1) LIMIT 1;
     </insert>
     <update id="unselectCourse" parameterType="Integer">
         update course_select_record set isValid = 0 where sId = #{sId} and cId = #{cId};
