@@ -96,4 +96,13 @@ public class StudentService {
     public String getCourseComment(Integer sId, Integer cId) {
         return studentDao.getCourseComment(sId,cId);
     }
+
+    public Student getStudentByWxid(String wxid) {
+        return studentDao.getStudentByWxid(wxid);
+    }
+
+    public void register(String sName, String wxId) {
+        int maxId = studentDao.getMaxSId();
+        studentDao.register(maxId+1,sName,wxId);
+    }
 }

@@ -51,5 +51,11 @@ public interface StudentDao {
     List<Courseware> getCoursewareByCId(@Param("cId")Integer cId);
 
     String getCourseComment(@Param("sId")Integer sId, @Param("cId")Integer cId);
+
+    Student getStudentByWxid(String wxid);
+
+    void register(@Param("maxId")int maxId,@Param("sName")String sName, @Param("wxId")String wxId);
+
+    int getMaxSId();
 }
 

@@ -167,6 +167,24 @@ public class DispatcherController {
             return "failed";
         }
     }
+    @ResponseBody
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String commentCourse(String sName, String wxId) {
+        if (sName == null || wxId == null || sName.length()<2 ){
+            return "failed";
+        }
+        try {
+            Student existStudent = studentService.getStudentByWxid(wxId);
+            if (existStudent!=null){
+                return "existed";
+            }
+            studentService.register(sName,wxId);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "failed";
+        }
+    }
 
 
 

@@ -68,5 +68,15 @@
     <select id="getCoursewareByCId" resultType="com.nju.bean.Courseware">
     	select * from courseware where cId=#{cId}
     </select>
+    <!--注册-->
+    <select id="getStudentByWxid" resultType="com.nju.bean.Student">
+        select * from student where wxId = #{wxId};
+    </select>
+    <insert id="register" >
+        insert into student(sId, sNAME,wxId) values (#{maxId},#{sName},#{wxId});
+    </insert>
+    <select id="getMaxSId" resultType="Integer">
+        select max(sId) from student;
+    </select>
 
 </mapper>
