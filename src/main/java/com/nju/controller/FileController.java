@@ -62,7 +62,7 @@ import com.nju.service.TeacherService;
 //					OutputStream out = response.getOutputStream();
 //					while ((len = in.read(buffer)) > 0) {
 //						 out.write(buffer,0,len);//将缓冲区的数据输出到客户端浏览器
-//					 }
+//					}
 //					in.close();
 //					studentService.updateCoursewareDownCount(cwId);
 //					return "success";
@@ -87,6 +87,7 @@ import com.nju.service.TeacherService;
 				//获取绝对路径
 
 				Courseware cw=studentService.getCourseware(cwId);
+				studentService.updateCoursewareDownCount(cwId);
 				return cw.getUrl()+"/"+cw.getCwName();
 			}
 			catch( Exception e) {
