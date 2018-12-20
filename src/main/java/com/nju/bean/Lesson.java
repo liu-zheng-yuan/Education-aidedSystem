@@ -1,5 +1,7 @@
 package com.nju.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 //封装了某个学生的某门课程的课堂信息包括课堂评价
@@ -8,6 +10,7 @@ public class Lesson {
     private int cId;
     private Date lTime;
     private String comment;
+    private Date cTime;
 
     @Override
     public String toString() {
@@ -16,6 +19,7 @@ public class Lesson {
                 ", cId=" + cId +
                 ", lTime=" + lTime +
                 ", comment='" + comment + '\'' +
+                ", cTime=" + cTime +
                 '}';
     }
 
@@ -49,5 +53,14 @@ public class Lesson {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    public Date getcTime() {
+        return cTime;
+    }
+
+    public void setcTime(Date cTime) {
+        this.cTime = cTime;
     }
 }

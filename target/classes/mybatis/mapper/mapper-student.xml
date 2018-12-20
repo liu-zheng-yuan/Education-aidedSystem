@@ -10,7 +10,9 @@
         select token from course where cId = #{cId};
     </select>
     <insert id="selectCourse" parameterType="Integer">
-        insert into course_select_record (sId, cId,isValid) values (#{sId},#{cId},1);
+        INSERT INTO course_select_record (sId, cId,isValid)
+        SELECT #{sId},#{cId},1 FROM course_select_record
+        WHERE NOT EXISTS(SELECT sId,cId,isValid FROM course_select_record WHERE sId = #{sId} AND cId = #{cId} AND isValid = 1) LIMIT 1;
     </insert>
     <update id="unselectCourse" parameterType="Integer">
         update course_select_record set isValid = 0 where sId = #{sId} and cId = #{cId};
@@ -42,7 +44,7 @@
         select h.hId from homework h join answer_record ar on h.hId = ar.hId where h.cId = #{cId} and ar.sId = #{sId};
     </select>
     <select id="getLessons" resultType="com.nju.bean.Lesson">
-        select l.lId,l.cId,l.lTime,lcr.comment from lesson l join lesson_comment_record lcr on l.lId = lcr.lId
+        select l.lId,l.cId,DATE_FORMAT(lcr.cTime,'%Y-%m-%d %H:%i:%s') cTime,lcr.comment from lesson l join lesson_comment_record lcr on l.lId = lcr.lId
         where lcr.sId = #{sId} and l.cId = #{cId};
     </select>
     <update id="commentLesson">
@@ -51,6 +53,9 @@
     <update id="commentCourse">
         update course_select_record set comment = #{comment} where sId = #{sId} and cId = #{cId} and isValid = 1;
     </update>
+    <select id="getCourseComment" resultType="String">
+        select comment from course_select_record where sId=#{sId} and cId = #{cId} and isValid = 1;
+    </select>
     <select id="getCourseware" resultType="com.nju.bean.Courseware">
     	select * from courseware where cwId=#{cwId}
     </select>

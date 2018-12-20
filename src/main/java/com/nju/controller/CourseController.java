@@ -142,6 +142,23 @@ public class CourseController {
             return null;
         }
     }
+    /*
+     * 获得某个学生对某个课程的评价
+     * */
+    @ResponseBody
+    @RequestMapping(value = "/getCourseComment", method = RequestMethod.POST)
+    public String commentCourse(Integer cId,HttpSession session) {
+        Student student = (Student) session.getAttribute("loginUser");
+        if (student == null ) {
+            return null;
+        }
+        try {
+            return studentService.getCourseComment(student.getsId(),cId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
     
 }

@@ -92,4 +92,8 @@ public class StudentService {
     public List<Homework> getAnsweredQuestion(Integer cId,Integer sId) {
         return studentDao.getAnsweredQuestion(cId,sId);
     }
+
+    public String getCourseComment(Integer sId, Integer cId) {
+        return studentDao.getCourseComment(sId,cId);
+    }
 }

@@ -49,5 +49,7 @@ public interface StudentDao {
     void updateCoursewareViewCount(@Param("cwId")Integer cwId);
 
     List<Courseware> getCoursewareByCId(@Param("cId")Integer cId);
+
+    String getCourseComment(@Param("sId")Integer sId, @Param("cId")Integer cId);
 }
 
