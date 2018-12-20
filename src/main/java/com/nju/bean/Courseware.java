@@ -1,5 +1,7 @@
 package com.nju.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Courseware {
@@ -10,6 +12,7 @@ public class Courseware {
 	private Integer downCount;
 	private Integer viewCount;
 	private Date uploadTime;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getUploadTime() {
 		return uploadTime;
 	}

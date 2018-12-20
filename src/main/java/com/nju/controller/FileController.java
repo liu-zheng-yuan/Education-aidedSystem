@@ -87,7 +87,7 @@ import com.nju.service.TeacherService;
 				//获取绝对路径
 
 				Courseware cw=studentService.getCourseware(cwId);
-				return cw.getUrl();
+				return cw.getUrl()+"/"+cw.getCwName();
 			}
 			catch( Exception e) {
 				e.printStackTrace();

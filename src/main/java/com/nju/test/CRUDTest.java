@@ -173,7 +173,7 @@ public class CRUDTest {
     @Test
     public void testDownloadCourseware() throws Exception {
     	this.mockMvc.perform(get("/download")
-    			.param("cwId", "1").session((MockHttpSession) getLoginSession())).andDo(print());
+    			.param("cwId", "7").session((MockHttpSession) getLoginSession())).andDo(print());
     }
     
     @Test
