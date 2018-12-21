@@ -145,7 +145,7 @@ public class CRUDTest {
     public void testCommentLesson() throws Exception {
         this.mockMvc.perform(post("/commentLesson")
                 .param("lId","5")
-                .param("comment","1号用户上第3类课的第5号课2")
+                .param("comment","1号用户上第3类课的第5号课3")
                 .session((MockHttpSession)getLoginSession()))
                 .andDo(print());
     }
@@ -153,7 +153,7 @@ public class CRUDTest {
     public void testCommentCourse() throws Exception {
         this.mockMvc.perform(post("/commentCourse")
                 .param("cId","1")
-                .param("comment","1号用户对1号课程的评价")
+                .param("comment","test111")
                 .session((MockHttpSession)getLoginSession()))
                 .andDo(print());
     }
@@ -188,7 +188,7 @@ public class CRUDTest {
     }
     @Test
     public void testGetCourseComment() throws Exception{
-        this.mockMvc.perform(post("/getCourseComment").param("cId","2")
+        this.mockMvc.perform(post("/getCourseComment").param("cId","1")
                 .session((MockHttpSession) getLoginSession())).andDo(print());
     }
     @Test

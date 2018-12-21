@@ -4,6 +4,7 @@ import com.nju.bean.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Date;
 import java.util.List;
 
 public interface StudentDao {
@@ -34,9 +35,9 @@ public interface StudentDao {
 
     List<Lesson> getLessons(@Param("sId")Integer sId, @Param("cId")Integer cId);
 
-    void commentLesson(@Param("sId")Integer sId, @Param("lId")Integer lId, @Param("comment")String comment);
+    void commentLesson(@Param("sId") Integer sId, @Param("lId") Integer lId, @Param("comment") String comment, @Param("now")Date now);
 
-    void commentCourse(@Param("sId")Integer sId, @Param("cId")Integer cId, @Param("comment")String comment);
+    void commentCourse(@Param("sId") Integer sId, @Param("cId") Integer cId, @Param("comment") String comment, @Param("now")Date now);
 
     Courseware getCourseware(@Param("cwId")Integer cwId);
 

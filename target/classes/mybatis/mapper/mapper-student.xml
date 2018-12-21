@@ -48,13 +48,13 @@
         where lcr.sId = #{sId} and l.cId = #{cId};
     </select>
     <update id="commentLesson">
-        update lesson_comment_record set comment = #{comment} where sId = #{sId} and lId = #{lId};
+        update lesson_comment_record set comment = #{comment},cTime = #{now} where sId = #{sId} and lId = #{lId};
     </update>
     <update id="commentCourse">
-        update course_select_record set comment = #{comment} where sId = #{sId} and cId = #{cId} and isValid = 1;
+        update course_select_record set comment = #{comment},commentTime = #{now} where sId = #{sId} and cId = #{cId} and isValid = 1;
     </update>
-    <select id="getCourseComment" resultType="String">
-        select comment from course_select_record where sId=#{sId} and cId = #{cId} and isValid = 1;
+    <select id="getCourseComment" resultType="com.nju.bean.CourseComment">
+        select comment,commentTime from course_select_record where sId=#{sId} and cId = #{cId} and isValid = 1;
     </select>
     <select id="getCourseware" resultType="com.nju.bean.Courseware">
     	select * from courseware where cwId=#{cwId}

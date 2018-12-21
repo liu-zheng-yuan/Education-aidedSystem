@@ -5,6 +5,7 @@ import com.nju.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -61,12 +62,12 @@ public class StudentService {
         return studentDao.getLessons(sId, cId);
     }
 
-    public void commentLesson(Integer sId, Integer lId, String comment) {
-        studentDao.commentLesson(sId,lId,comment);
+    public void commentLesson(Integer sId, Integer lId, String comment, Date now) {
+        studentDao.commentLesson(sId,lId,comment,now);
     }
 
-    public void commentCourse(Integer sId, Integer cId, String comment) {
-        studentDao.commentCourse(sId,cId,comment);
+    public void commentCourse(Integer sId, Integer cId, String comment, Date now) {
+        studentDao.commentCourse(sId,cId,comment,now);
     }
     
     public Courseware getCourseware(Integer cwId) {

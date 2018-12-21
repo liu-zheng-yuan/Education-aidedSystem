@@ -149,7 +149,7 @@ public class CourseController {
     @RequestMapping(value = "/getCourseComment", method = RequestMethod.POST)
     public CourseComment commentCourse(Integer cId,HttpSession session) {
         Student student = (Student) session.getAttribute("loginUser");
-        if (student == null ) {
+        if (student == null || cId == null) {
             return null;
         }
         try {

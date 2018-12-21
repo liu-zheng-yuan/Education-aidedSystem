@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 public class DispatcherController {
@@ -141,7 +142,8 @@ public class DispatcherController {
             return "failed";
         }
         try {
-            studentService.commentLesson(student.getsId(),lId,comment);
+            Date now = new Date();
+            studentService.commentLesson(student.getsId(),lId,comment,now);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +162,8 @@ public class DispatcherController {
             return "failed";
         }
         try {
-            studentService.commentCourse(student.getsId(),cId,comment);
+            Date now = new Date();
+            studentService.commentCourse(student.getsId(),cId,comment,now);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();
