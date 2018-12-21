@@ -188,7 +188,7 @@ public class CRUDTest {
     }
     @Test
     public void testGetCourseComment() throws Exception{
-        this.mockMvc.perform(post("/getCourseComment").param("cId","4")
+        this.mockMvc.perform(post("/getCourseComment").param("cId","2")
                 .session((MockHttpSession) getLoginSession())).andDo(print());
     }
     @Test

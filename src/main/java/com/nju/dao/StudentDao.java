@@ -1,10 +1,6 @@
 package com.nju.dao;
 
-import com.nju.bean.Course;
-import com.nju.bean.Courseware;
-import com.nju.bean.Homework;
-import com.nju.bean.Lesson;
-import com.nju.bean.Student;
+import com.nju.bean.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -50,7 +46,7 @@ public interface StudentDao {
 
     List<Courseware> getCoursewareByCId(@Param("cId")Integer cId);
 
-    String getCourseComment(@Param("sId")Integer sId, @Param("cId")Integer cId);
+    CourseComment getCourseComment(@Param("sId")Integer sId, @Param("cId")Integer cId);
 
     Student getStudentByWxid(String wxid);
 

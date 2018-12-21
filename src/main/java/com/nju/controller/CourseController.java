@@ -147,7 +147,7 @@ public class CourseController {
      * */
     @ResponseBody
     @RequestMapping(value = "/getCourseComment", method = RequestMethod.POST)
-    public String commentCourse(Integer cId,HttpSession session) {
+    public CourseComment commentCourse(Integer cId,HttpSession session) {
         Student student = (Student) session.getAttribute("loginUser");
         if (student == null ) {
             return null;

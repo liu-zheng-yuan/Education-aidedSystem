@@ -1,10 +1,6 @@
 package com.nju.service;
 
-import com.nju.bean.Course;
-import com.nju.bean.Courseware;
-import com.nju.bean.Homework;
-import com.nju.bean.Lesson;
-import com.nju.bean.Student;
+import com.nju.bean.*;
 import com.nju.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,7 +89,7 @@ public class StudentService {
         return studentDao.getAnsweredQuestion(cId,sId);
     }
 
-    public String getCourseComment(Integer sId, Integer cId) {
+    public CourseComment getCourseComment(Integer sId, Integer cId) {
         return studentDao.getCourseComment(sId,cId);
     }
 

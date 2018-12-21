@@ -120,8 +120,8 @@ import com.nju.service.TeacherService;
 			}
 
 		}
-
 		/*
+
 		 * 查看课件信息：根据cId
 		 */
 
