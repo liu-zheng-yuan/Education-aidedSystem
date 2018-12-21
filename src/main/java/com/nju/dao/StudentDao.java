@@ -54,5 +54,11 @@ public interface StudentDao {
     void register(@Param("maxId")int maxId,@Param("sName")String sName, @Param("wxId")String wxId);
 
     int getMaxSId();
+
+    List<Integer> getLessonsBycId(Integer cId);
+
+    void addEmptyLessonCommentRecord(@Param("sId")Integer sId, @Param("lids")List<Integer> lessonIds);
+
+    void delLessonCommentRecord(@Param("sId")Integer sId, @Param("lids")List<Integer> lessonIds);
 }
 

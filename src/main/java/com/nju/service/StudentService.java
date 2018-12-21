@@ -18,10 +18,16 @@ public class StudentService {
     }
 
     public void selectCourse(Integer sId, Integer cId) {
+        // 选课的时候要把该门课对应的lesson加入lesson_comment_record表里，不然后面不能返回所有课程的评价，会少。更新评价的时候也会缺失
         studentDao.selectCourse(sId,cId);
+        List<Integer> lessonIds = studentDao.getLessonsBycId(cId);
+        studentDao.addEmptyLessonCommentRecord(sId,lessonIds);
     }
 
     public void unselectCourse(Integer sId, Integer cId) {
+        //退课的时候也要把对应课程的对应lesson的对应lesson_comment_record表删除相关课程评价
+        List<Integer> lessonIds = studentDao.getLessonsBycId(cId);
+        studentDao.delLessonCommentRecord(sId,lessonIds);
         studentDao.unselectCourse(sId, cId);
     }
 

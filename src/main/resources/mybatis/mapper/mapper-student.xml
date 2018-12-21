@@ -47,6 +47,23 @@
         select l.lId,l.cId,DATE_FORMAT(lcr.cTime,'%Y-%m-%d %H:%i:%s') cTime,lcr.comment from lesson l join lesson_comment_record lcr on l.lId = lcr.lId
         where lcr.sId = #{sId} and l.cId = #{cId};
     </select>
+    <select id="getLessonsBycId" resultType="Integer">
+        select lId from lesson where cId = #{cId};
+    </select>
+    <!--批量加lessonCommentRecord表中的空记录 选课之后-->
+    <insert id="addEmptyLessonCommentRecord">
+        insert into lesson_comment_record(sId, lId) values 
+        <foreach collection="lids" item="lId" separator=",">
+            (#{sId},#{lId})
+        </foreach>
+    </insert>
+    <!--批量删除lessonCommentRecord表中的记录 退课之后-->
+    <delete id="delLessonCommentRecord">
+        delete from lesson_comment_record where sId = #{sId} and lId in
+        <foreach collection="lids" item="lId" separator="," open="(" close=")">
+            #{lId}
+        </foreach>
+    </delete>
     <update id="commentLesson">
         update lesson_comment_record set comment = #{comment},cTime = #{now} where sId = #{sId} and lId = #{lId};
     </update>

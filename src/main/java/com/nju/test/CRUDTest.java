@@ -59,7 +59,7 @@ public class CRUDTest {
     private HttpSession getLoginSession() throws Exception {
         //模拟请求之后 登录信息保存在session中
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/doSLogin")
-                .param("wxId","aaa111")).andReturn();
+                .param("wxId","ddd444")).andReturn();
         return result.getRequest().getSession();
     }
 
@@ -83,7 +83,7 @@ public class CRUDTest {
 
     @Test
     public void testSelectCourse() throws Exception{
-        this.mockMvc.perform(post("/selectCourse").param("cId", "5").param("token","111")
+        this.mockMvc.perform(post("/selectCourse").param("cId", "1").param("token","111")
                 .session((MockHttpSession) getLoginSession()))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -144,8 +144,8 @@ public class CRUDTest {
     @Test
     public void testCommentLesson() throws Exception {
         this.mockMvc.perform(post("/commentLesson")
-                .param("lId","5")
-                .param("comment","1号用户上第3类课的第5号课3")
+                .param("lId","2")
+                .param("comment","四号用户评论语文课 lid等于2")
                 .session((MockHttpSession)getLoginSession()))
                 .andDo(print());
     }
@@ -153,7 +153,7 @@ public class CRUDTest {
     public void testCommentCourse() throws Exception {
         this.mockMvc.perform(post("/commentCourse")
                 .param("cId","1")
-                .param("comment","test111")
+                .param("comment","四号用户评论语文课")
                 .session((MockHttpSession)getLoginSession()))
                 .andDo(print());
     }
